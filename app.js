@@ -1,10 +1,12 @@
 const express = require('express');
-
+const port = process.env.PORT || 3000
 // express app
 const app = express();
 
 // listen for requests
-app.listen(3000);
+app.listen(port, () => {
+	console.log(`Server listening for port ${port}`)
+});
 
 // register view engine
 app.set('view engine', 'ejs');
@@ -22,12 +24,7 @@ app.use((req, res, next) => {
   
   
   app.get('/', (req, res) => {
-	const blogs = [
-	  {title: 'Pastel de zanahoria', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-	  {title: 'Zhulien de champiñones', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-	  {title: 'Shakshuka', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-	];
-	res.render('index', { title: 'Fishes List', blogs });
+	res.render('index', { title: 'Fishes List'});
   });
   
   app.get('/about', (req, res) => {
@@ -42,4 +39,3 @@ app.use((req, res, next) => {
   app.use((req, res) => {
 	res.status(404).render('404', { title: '404' });
   });
-  
