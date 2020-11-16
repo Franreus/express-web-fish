@@ -1,7 +1,6 @@
-const express = require('express');
+const express = require('express')
 
 require('./db/mongoose')
-const fishRouter = require('./routers/fish')
 
 const port = process.env.PORT
 // express app
@@ -42,7 +41,10 @@ app.get(/^\/fish\/(.*?)\/?$/, (req, res) => {
 app.get('/fav-list', (req, res) => {
 	res.render('fav-list', { title: 'Fav List' });
 });
-  
+
+//Api
+const fishRouter = require('./routers/fish')
+
 app.use(express.json())
 app.use('/api', fishRouter)
 

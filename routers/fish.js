@@ -5,11 +5,7 @@ const router = new express.Router()
 router.get('/fishes', async (req, res) => {
     try {
         const fishes = await Fish.find({})
-
-        if (!fishes) {
-            return res.status(404).send()
-        }
-
+        if (!fishes) return res.status(404).send()
         return res.send(fishes)
     } catch (e) {
         return res.status(500).send()
@@ -29,7 +25,6 @@ router.get('/fishes/:id', async (req, res) => {
 router.post('/fishes', async (req, res) => {
 	try {
 		const oldFish = await Fish.find({"id":req.body['id']})
-		console.log(oldFish)
 		if(oldFish.length > 0)	return res.send('Fish already exists')
 		const fish = new Fish(req.body)
 		await fish.save()
